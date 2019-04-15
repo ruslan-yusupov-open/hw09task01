@@ -2,8 +2,8 @@ package com.example.lang_calculator;
 
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +17,8 @@ import java.util.Locale;
 public class SettingsActivity extends AppCompatActivity {
 
     Spinner spinner_lang;
+    Spinner spinner_margin;
+    Spinner spinner_color;
 
     private boolean userIsInteracting;
 
@@ -29,13 +31,16 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
+
         setContentView(R.layout.activity_settings);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-
         spinner_lang = findViewById(R.id.spinner_lang);
+        spinner_margin = findViewById(R.id.spinner_margin);
+        spinner_color = findViewById(R.id.spinner_color);
 
         initSpinner();
     }
@@ -46,51 +51,167 @@ public class SettingsActivity extends AppCompatActivity {
         // spinner_lang.setSelected(false);  // must
         spinner_lang.setSelection("en".equals(current.toString()) ? 1 : 0);
 
+        spinner_margin.setSelection(Utils.getsTheme());
+        spinner_color.setSelection(Utils.getsColor());
+
         spinner_lang.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0: {
-                        if (userIsInteracting) {
-                            Toast.makeText(
-                                    SettingsActivity.this,
-                                    "русский язык выбран",
-                                    Toast.LENGTH_LONG)
-                                    .show();
-
-                            Locale locale = new Locale("ru");
-                            Configuration config = new Configuration();
-                            config.setLocale(locale);
-                            getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                            recreate();
-                        }
-
-                        break;
-                    }
-                    case 1: {
-                        if (userIsInteracting) {
-                            Toast.makeText(
-                                    SettingsActivity.this,
-                                    "english selected",
-                                    Toast.LENGTH_LONG)
-                                    .show();
-
-                            Locale locale = new Locale("en");
-                            Configuration config = new Configuration();
-                            config.setLocale(locale);
-                            getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-                            recreate();
-                        }
-
-                        break;
-                    }
-                }
+                langSpinnerSelected(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+
+        spinner_margin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                marginSpinnerSelected(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spinner_margin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                colorSpinnerSelected(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+    }
+
+    private void langSpinnerSelected(int position) {
+        switch (position) {
+            case 0: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "русский язык выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+
+                    Locale locale = new Locale("ru");
+                    Configuration config = new Configuration();
+                    config.setLocale(locale);
+                    getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    recreate();
+                }
+
+                break;
+            }
+            case 1: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "english selected",
+                            Toast.LENGTH_LONG)
+                            .show();
+
+                    Locale locale = new Locale("en");
+                    Configuration config = new Configuration();
+                    config.setLocale(locale);
+                    getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+                    recreate();
+                }
+
+                break;
+            }
+        }
+    }
+
+    private void marginSpinnerSelected(int position) {
+        switch (position) {
+            case 0: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "малый отступ выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    Utils.changeToTheme(this, Utils.THEME_SMALL, Utils.COLOR_BLACK);
+                }
+
+                break;
+            }
+            case 1: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "средний отступ выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+
+                    Utils.changeToTheme(this, Utils.THEME_AVG, Utils.COLOR_BLACK);
+                }
+
+                break;
+            }
+            case 2: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "большой отступ выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+
+                    Utils.changeToTheme(this, Utils.THEME_BIG, Utils.COLOR_BLACK);
+                }
+
+                break;
+            }
+        }
+    }
+
+
+    private void colorSpinnerSelected(int position) {
+        switch (position) {
+            case 0: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "черный цвет выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    Utils.changeToTheme(this, Utils.THEME_SMALL, Utils.COLOR_BLACK);
+                }
+
+                break;
+            }
+            case 1: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "зеленый цвет выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+
+                    Utils.changeToTheme(this, Utils.THEME_AVG, Utils.COLOR_GREEN);
+                }
+
+                break;
+            }
+            case 2: {
+                if (userIsInteracting) {
+                    Toast.makeText(
+                            SettingsActivity.this,
+                            "синий цвет выбран",
+                            Toast.LENGTH_LONG)
+                            .show();
+
+                    Utils.changeToTheme(this, Utils.THEME_BIG, Utils.COLOR_BLUE);
+                }
+
+                break;
+            }
+        }
     }
 
     @Override
