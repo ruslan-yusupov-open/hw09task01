@@ -31,31 +31,28 @@ class Utils {
      * Set the theme of the activity, according to the configuration.
      */
     public static void onActivityCreateSetTheme(Activity activity) {
-        switch (sTheme) {
-            default:
-            case THEME_SMALL:
-                activity.setTheme(R.style.AppTheme);
-                break;
-            case THEME_AVG:
-                activity.setTheme(R.style.AppAvgMargin);
-                break;
-            case THEME_BIG:
-                activity.setTheme(R.style.AppBigMargin);
-                break;
-        }
+        if (sTheme == THEME_SMALL && sColor == COLOR_BLACK)
+            activity.setTheme(R.style.AppTheme);
 
-        switch (sColor) {
-            default:
-            case COLOR_BLACK:
-                activity.setTheme(R.style.AppTheme);
-                break;
-            case COLOR_GREEN:
-                activity.setTheme(R.style.AppThemeGreen);
-                break;
-            case COLOR_BLUE:
-                activity.setTheme(R.style.AppThemeBlue);
-                break;
-        }
+        if (sColor == COLOR_BLACK)
+            switch (sTheme) {
+                case THEME_AVG:
+                    activity.setTheme(R.style.AppAvgMargin);
+                    break;
+                case THEME_BIG:
+                    activity.setTheme(R.style.AppBigMargin);
+                    break;
+            }
+
+        if (sTheme == THEME_SMALL)
+            switch (sColor) {
+                case COLOR_GREEN:
+                    activity.setTheme(R.style.AppThemeGreen);
+                    break;
+                case COLOR_BLUE:
+                    activity.setTheme(R.style.AppThemeBlue);
+                    break;
+            }
     }
 
     public static int getsTheme() {

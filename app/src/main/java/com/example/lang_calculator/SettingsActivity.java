@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
-        spinner_margin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 colorSpinnerSelected(position);
@@ -193,7 +193,7 @@ public class SettingsActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG)
                             .show();
 
-                    Utils.changeToTheme(this, Utils.THEME_AVG, Utils.COLOR_GREEN);
+                    Utils.changeToTheme(this, Utils.THEME_SMALL, Utils.COLOR_GREEN);
                 }
 
                 break;
@@ -206,7 +206,7 @@ public class SettingsActivity extends AppCompatActivity {
                             Toast.LENGTH_LONG)
                             .show();
 
-                    Utils.changeToTheme(this, Utils.THEME_BIG, Utils.COLOR_BLUE);
+                    Utils.changeToTheme(this, Utils.THEME_SMALL, Utils.COLOR_BLUE);
                 }
 
                 break;
