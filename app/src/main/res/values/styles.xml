@@ -11,7 +11,7 @@
         <item name="android:layout_margin">1dp</item>
     </style>
 
-    <style name="AppThemeGreen" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeGreen" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryGreen</item>
         <item name="colorButtonNormal">@color/colorPrimaryDarkGreen</item>
@@ -19,7 +19,7 @@
         <item name="colorAccent">@color/colorAccentGreen</item>
     </style>
 
-    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppThemeBlue" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimaryBlue</item>
         <item name="colorButtonNormal">@color/colorPrimaryDarkBlue</item>
